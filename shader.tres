@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d2qdm1byirqow"]
+
+[ext_resource type="Shader" uid="uid://c2csft57qk04a" path="res://background.gdshader" id="1_a84kh"]
+
+[resource]
+shader = ExtResource("1_a84kh")
+shader_parameter/color1 = Vector4(1, 1, 1, 1)
+shader_parameter/color2 = Vector4(1, 0.823, 0.823, 1)
+shader_parameter/speed = 0.05
+shader_parameter/bar_width = 0.1

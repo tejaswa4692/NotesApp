@@ -1,0 +1,268 @@
+[gd_scene load_steps=20 format=3 uid="uid://b2k8db16jd8xf"]
+
+[ext_resource type="Script" uid="uid://bopqe3bfsibqa" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="FontFile" uid="uid://sks63ere33r2" path="res://Pixelify_Sans/static/PixelifySans-Regular.ttf" id="1_ig7tw"]
+[ext_resource type="Shader" uid="uid://c2csft57qk04a" path="res://background.gdshader" id="2_h2yge"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bvp3"]
+shader = ExtResource("2_h2yge")
+shader_parameter/color1 = Vector4(1, 1, 1, 1)
+shader_parameter/color2 = Vector4(1, 0.823, 0.823, 1)
+shader_parameter/speed = 0.05
+shader_parameter/bar_width = 0.1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
+content_margin_left = 24.0
+content_margin_top = 44.0
+content_margin_right = 24.0
+content_margin_bottom = 44.0
+bg_color = Color(0.8, 0.458824, 0.458824, 1)
+border_color = Color(1, 1, 1, 0)
+corner_radius_top_left = 90
+corner_radius_top_right = 90
+corner_radius_bottom_right = 90
+corner_radius_bottom_left = 90
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c57u"]
+bg_color = Color(0.684216, 0.415761, 0.467356, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kek77"]
+bg_color = Color(0.552945, 0.316438, 0.363353, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+bg_color = Color(0.622659, 0.358569, 0.390856, 1)
+corner_radius_top_left = 90
+corner_radius_top_right = 90
+corner_radius_bottom_right = 90
+corner_radius_bottom_left = 90
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2yge"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
+bg_color = Color(0.489962, 0.273861, 0.317473, 1)
+border_width_left = 20
+border_width_right = 20
+border_color = Color(0.490196, 0.27451, 0.317647, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1bvp3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
+bg_color = Color(0.490196, 0.27451, 0.317647, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0.325441, 0.325441, 0.325441, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mycd"]
+bg_color = Color(0.289274, 0.15012, 0.177497, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lquwl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7mycd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
+bg_color = Color(0.490196, 0.27451, 0.317647, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_efxa6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vw27"]
+bg_color = Color(0.386979, 0.209094, 0.244978, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ycdy4"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_0xm2m")
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_1bvp3")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -295.5
+offset_top = 115.0
+offset_right = 295.5
+offset_bottom = 404.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.419608, 0.133333, 0.133333, 1)
+theme_override_fonts/normal_font = ExtResource("1_ig7tw")
+theme_override_font_sizes/normal_font_size = 200
+text = "NOTES"
+
+[node name="ItemList" type="ItemList" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.545
+anchor_right = 0.5
+anchor_bottom = 0.557
+offset_left = -341.5
+offset_top = -645.5
+offset_right = 341.5
+offset_bottom = 645.5
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+mouse_force_pass_scroll_events = false
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/v_separation = 5
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 86
+theme_override_styles/panel = SubResource("StyleBoxFlat_0xm2m")
+item_count = 2
+icon_scale = 5.0
+item_0/text = "hi"
+item_1/text = "hello"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -135.0
+offset_top = -133.0
+offset_right = 136.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 71
+theme_override_styles/hover = SubResource("StyleBoxFlat_4c57u")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kek77")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c57u")
+text = "New"
+
+[node name="NewNoteContainer" type="Node2D" parent="."]
+
+[node name="Panel" type="Panel" parent="NewNoteContainer"]
+anchors_preset = -1
+offset_left = -371.0
+offset_top = -204.0
+offset_right = 372.0
+offset_bottom = 141.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h2yge")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NewNoteContainer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -248.5
+offset_top = 53.0
+offset_right = 246.5
+offset_bottom = 150.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("1_ig7tw")
+theme_override_font_sizes/normal_font_size = 76
+text = "Create Note"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="NewNoteContainer"]
+anchors_preset = -1
+offset_left = -338.0
+offset_top = -43.5
+offset_right = 338.0
+offset_bottom = 43.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 66
+theme_override_styles/focus = SubResource("StyleBoxEmpty_h2yge")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1bvp3")
+placeholder_text = "Enter File Name"
+metadata/_edit_use_anchors_ = true
+
+[node name="Create" type="Button" parent="NewNoteContainer"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.0
+offset_top = 79.0
+offset_right = 85.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 41
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1bvp3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lquwl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7mycd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lquwl")
+text = "Create"
+
+[node name="Button2" type="Button" parent="NewNoteContainer"]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 277.0
+offset_top = -172.0
+offset_right = 330.0
+offset_bottom = -116.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lquwl")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7mycd")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_272bh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_272bh")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_efxa6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5vw27")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_ycdy4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_272bh")
+text = "X"
+
+[connection signal="item_clicked" from="ItemList" to="." method="_on_item_list_item_clicked"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="NewNoteContainer/Create" to="." method="_on_create_pressed"]
+[connection signal="pressed" from="NewNoteContainer/Button2" to="." method="_on_button_2_pressed"]

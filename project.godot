@@ -1,0 +1,35 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Notes_app"
+run/main_scene="uid://b2k8db16jd8xf"
+config/features=PackedStringArray("4.4", "Mobile")
+config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://GlobalScript.gd"
+
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/handheld/orientation=1
+
+[editor]
+
+movie_writer/movie_file="F:/notes_app/movee/Gay.avi"
+
+[rendering]
+
+renderer/rendering_method="mobile"
+anti_aliasing/screen_space_roughness_limiter/enabled=false

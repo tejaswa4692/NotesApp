@@ -1,0 +1,14 @@
+.import/
+.export/
+.godot/
+*.tmp
+*.log
+.mono/
+*.csproj
+*.sln
+*.userprefs
+.vs/
+.DS_Store
+Thumbs.db
+*~
+*.swp
