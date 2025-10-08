@@ -9,7 +9,7 @@ void fragment() {
     // Shift UV horizontally over time
     float u = UV.x + TIME * speed;
     // Make stripes repeat
-	
+
     float stripe = mod(floor(u / bar_width), 2.0);
 
     // Pick color based on stripe index

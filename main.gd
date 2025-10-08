@@ -11,7 +11,8 @@ var messages = [
 	 "bhondu name dalo",
 	 "NAME?!?!?!?",
 	 "slowpoke ho kya",
-	"baby name dalte ha"
+	"baby name dalte ha",
+	"Tejas jaisi ho kya ap"
 	]
 var _last_number: int = -1 
 
@@ -23,7 +24,11 @@ func _ready():
 	panel.position.x = screen.x / 2 - panel.size.x / 2
 	panel.position.y = (screen.y - panel.size.y / 2) + screen.y / 2
 	# Open the user:// folder first
+	
+	
 	var base_dir = DirAccess.open("user://")
+	
+	
 	if base_dir and not base_dir.dir_exists("notes"):
 		# Create the notes folder
 		base_dir.make_dir("notes")
@@ -71,6 +76,7 @@ func _on_button_pressed() -> void:
 		await tween.finished
 		tween.kill()
 		is_newscreenopen = true
+
 
 
 func _on_button_2_pressed() -> void:

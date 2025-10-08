@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b2k8db16jd8xf"]
+[gd_scene load_steps=20 format=3 uid="uid://b2k8db16jd8xf"]
 
 [ext_resource type="Script" uid="uid://bopqe3bfsibqa" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="FontFile" uid="uid://sks63ere33r2" path="res://Pixelify_Sans/static/PixelifySans-Regular.ttf" id="1_ig7tw"]
@@ -15,6 +15,8 @@ corner_radius_top_left = 90
 corner_radius_top_right = 90
 corner_radius_bottom_right = 90
 corner_radius_bottom_left = 90
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_272bh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c57u"]
 bg_color = Color(0.684216, 0.415761, 0.467356, 1)
@@ -141,6 +143,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_ig7tw")
 theme_override_font_sizes/font_size = 71
+theme_override_styles/focus = SubResource("StyleBoxEmpty_272bh")
 theme_override_styles/hover = SubResource("StyleBoxFlat_4c57u")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_kek77")
 theme_override_styles/normal = SubResource("StyleBoxFlat_4c57u")

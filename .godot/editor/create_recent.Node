@@ -1,3 +1,4 @@
+RichTextLabel
 Panel
 ItemList
 Button
@@ -11,4 +12,3 @@ TextEdit
 ColorRect
 Node2D
 LineEdit
-RichTextLabel

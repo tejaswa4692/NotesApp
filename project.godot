@@ -32,4 +32,5 @@ movie_writer/movie_file="F:/notes_app/movee/Gay.avi"
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
 anti_aliasing/screen_space_roughness_limiter/enabled=false

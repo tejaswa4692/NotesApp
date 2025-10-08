@@ -1,0 +1,1 @@
+apksigner sign --ks debug.keystore --ks-key-alias androiddebugkey --ks-pass pass:android --key-pass pass:android --out NotesAppv1Signed.apk NoteAppv2.apk
