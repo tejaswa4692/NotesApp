@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cl1en4lbbdffo"]
+[gd_scene load_steps=20 format=3 uid="uid://cl1en4lbbdffo"]
 
 [ext_resource type="FontFile" uid="uid://sks63ere33r2" path="res://Pixelify_Sans/static/PixelifySans-Regular.ttf" id="1_spbdu"]
 [ext_resource type="Script" uid="uid://cujrkruilc7qd" path="res://read.gd" id="1_vhvs7"]
@@ -45,6 +45,8 @@ corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xq2h4"]
 bg_color = Color(0, 0, 0, 0.792157)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ciyjt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6fi6"]
 bg_color = Color(0.785494, 0.583224, 0.526029, 1)
@@ -173,6 +175,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_ciyjt")
 text = "Properties"
 
 [node name="Background2" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -181,7 +184,27 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xq2h4")
 
+[node name="backgroundexitbutton" type="Button" parent="Background2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ciyjt")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_ciyjt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ciyjt")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_ciyjt")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_ciyjt")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_ciyjt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ciyjt")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_ciyjt")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ciyjt")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_ciyjt")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ciyjt")
+
 [node name="SettingContainer" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1

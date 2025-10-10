@@ -1,5 +1,7 @@
 extends Control
 
+
+
 @onready var filename = Global.filename
 @onready var filepath = "user://notes/%s.json" % Global.filename
 var text: Dictionary
@@ -11,14 +13,22 @@ var showchanger: bool = false
 @onready var old_height = $TextEdit.size
 @onready var textedit = $TextEdit
 @onready var kb_height = DisplayServer.virtual_keyboard_get_height()
-var is_setting_open: bool
+var is_setting_open: bool = false
+
+
+
+
+
 
 
 func _ready() -> void:
+	print($Background2.modulate)
+	
+	
 	# Init
 	get_viewport().connect("size_changed", Callable(self, "_on_screen_resized"))
 	textedit.connect("focus_entered", Callable(self, "textedit_focus_entered"))
-	textedit.connect("focus_exited", Callable(self, "textedit_focus_exited"))
+	self.connect("", Callable(self, "textedit_focus_exited"))
 	#/Init
 	
 	#
@@ -117,5 +127,10 @@ func _on_changer_mouse_exited() -> void:
 
 func _on_properties_pressed() -> void:
 	if !is_setting_open:
+		$Background2.show()
 		var tween = create_tween()
+		var tween2 = create_tween()
 		tween.tween_property($SettingContainer, "position", Vector2(screen.x / 2 - $SettingContainer.size.x / 2, (screen.y /2 - $SettingContainer.size.y / 2)), 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		tween2.tween_property($Background2, "self_modulate", Vector4(1.0, 1.0, 1.0, 1.0), 0.2)
+		
+		

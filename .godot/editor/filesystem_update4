@@ -1,6 +1,4 @@
-res://main.tscn
+res://read.tscn
 res://background.gdshader
 res://shader.tres
 res://read.gd
-res://read.tscn
-res://main.gd
