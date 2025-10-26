@@ -1,8 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://cl1en4lbbdffo"]
+[gd_scene load_steps=32 format=3 uid="uid://cl1en4lbbdffo"]
 
 [ext_resource type="FontFile" uid="uid://sks63ere33r2" path="res://Pixelify_Sans/static/PixelifySans-Regular.ttf" id="1_spbdu"]
 [ext_resource type="Script" uid="uid://cujrkruilc7qd" path="res://read.gd" id="1_vhvs7"]
 [ext_resource type="Material" uid="uid://d2qdm1byirqow" path="res://shader.tres" id="2_b6fi6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gahvv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhvs7"]
 bg_color = Color(0.806527, 0.645324, 0.649454, 1)
@@ -71,6 +73,28 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ugbt2"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kxyef"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e4jli"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_it8ii"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c5j3w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6x4bh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_23ay1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bg14d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w4jbg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_px5sd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6gjt5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5du2a"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ugbt2"]
 bg_color = Color(0.863848, 0.585522, 0.473596, 1)
 corner_radius_top_left = 90
@@ -95,6 +119,25 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextSmallMaker" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gahvv")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_gahvv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_gahvv")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_gahvv")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_gahvv")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_gahvv")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_gahvv")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_gahvv")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gahvv")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_gahvv")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gahvv")
 
 [node name="TextEdit" type="TextEdit" parent="."]
 layout_mode = 1
@@ -175,7 +218,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_ciyjt")
 text = "Properties"
 
 [node name="Background2" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -204,7 +246,6 @@ theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_ciyjt")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ciyjt")
 
 [node name="SettingContainer" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -243,6 +284,34 @@ item_0/text = "Font Size"
 item_1/text = "Font Color"
 item_2/text = "Background"
 
+[node name="Background3" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xq2h4")
+
+[node name="propertyexitbutton" type="Button" parent="Background3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kxyef")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_e4jli")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_it8ii")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_c5j3w")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_6x4bh")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_23ay1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_bg14d")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_w4jbg")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_px5sd")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_6gjt5")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5du2a")
+
 [node name="Changer" type="Panel" parent="."]
 custom_minimum_size = Vector2(21.62, 0)
 layout_mode = 1
@@ -251,16 +320,39 @@ anchor_left = 0.1
 anchor_top = 0.3
 anchor_right = 0.9
 anchor_bottom = 0.7
-offset_left = 1830.0
-offset_top = 15.0
+offset_left = 1999.0
+offset_top = -147.0
 offset_right = 1830.0
 offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ugbt2")
 
+[node name="RichTextLabel" type="RichTextLabel" parent="Changer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_top = 0.07
+anchor_right = 0.85
+anchor_bottom = 0.165
+offset_top = -35.1
+offset_bottom = -0.450012
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.57753, 0.331594, 0.286429, 1)
+theme_override_fonts/normal_font = ExtResource("1_spbdu")
+theme_override_font_sizes/normal_font_size = 81
+text = "Background"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+threaded = true
+
+[connection signal="pressed" from="TextSmallMaker" to="." method="_on_text_small_maker_pressed"]
 [connection signal="pressed" from="Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Properties" to="." method="_on_properties_pressed"]
+[connection signal="pressed" from="Background2/backgroundexitbutton" to="." method="_on_backgroundexitbutton_pressed"]
+[connection signal="item_clicked" from="SettingContainer/ItemList" to="." method="_on_item_list_item_clicked"]
 [connection signal="item_selected" from="SettingContainer/ItemList" to="." method="_on_item_list_item_selected"]
+[connection signal="pressed" from="Background3/propertyexitbutton" to="." method="_on_propertyexitbutton_pressed"]
 [connection signal="mouse_exited" from="Changer" to="." method="_on_changer_mouse_exited"]

@@ -1,7 +1,6 @@
 extends Control
 
 
-
 @onready var filename = Global.filename
 @onready var filepath = "user://notes/%s.json" % Global.filename
 var text: Dictionary
@@ -14,10 +13,8 @@ var showchanger: bool = false
 @onready var textedit = $TextEdit
 @onready var kb_height = DisplayServer.virtual_keyboard_get_height()
 var is_setting_open: bool = false
-
-
-
-
+var is_scrolled_up: bool = false
+var propertymenu: bool = false
 
 
 
@@ -26,16 +23,12 @@ func _ready() -> void:
 	
 	
 	# Init
+	$Background3.hide()
+	$Background2.hide()
 	get_viewport().connect("size_changed", Callable(self, "_on_screen_resized"))
 	textedit.connect("focus_entered", Callable(self, "textedit_focus_entered"))
 	self.connect("", Callable(self, "textedit_focus_exited"))
 	#/Init
-	
-	#
-	#print(bg2col)
-	#bg2col = Vector4(0.0, 0.0, 0.0, 0.0)
-	#print(bg2col)
-	#
 	
 	
 	#Initially move the changer to right of the screen hidden
@@ -48,14 +41,14 @@ func _ready() -> void:
 	
 	#fontsize = $TextEdit.get_theme_font_size("font_size")
 	#print(fontsize)
-	$TextEdit.add_theme_font_size_override("font_size", 32) 
 	
+	$TextEdit.add_theme_font_size_override("font_size", 32) 
 	
 	
 	readcontents(filepath)
 
 
-func savecontents(path: String, data: String) -> void:
+func savecontents(data: String) -> void:
 	var newdata = {"title": filename, "content": data}
 	save_json(filepath, newdata)
 	pass
@@ -82,6 +75,7 @@ func save_json(file_path: String, data: Dictionary) -> void:
  
 
 func textedit_focus_entered():
+	is_scrolled_up = true
 	print("focused")
 	await get_tree().create_timer(0.2).timeout
 	var keyb_height = DisplayServer.virtual_keyboard_get_height()
@@ -101,7 +95,7 @@ func textedit_focus_exited():
 
 
 func _on_save_pressed() -> void:
-	savecontents(filepath, $TextEdit.text)
+	savecontents($TextEdit.text)
 
 
 func _on_back_pressed() -> void:
@@ -129,8 +123,41 @@ func _on_properties_pressed() -> void:
 	if !is_setting_open:
 		$Background2.show()
 		var tween = create_tween()
-		var tween2 = create_tween()
 		tween.tween_property($SettingContainer, "position", Vector2(screen.x / 2 - $SettingContainer.size.x / 2, (screen.y /2 - $SettingContainer.size.y / 2)), 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		tween2.tween_property($Background2, "self_modulate", Vector4(1.0, 1.0, 1.0, 1.0), 0.2)
-		
-		
+		is_setting_open = true
+
+
+func _on_backgroundexitbutton_pressed() -> void:
+	if is_setting_open and !propertymenu:
+		var tween = create_tween()
+		tween.tween_property($SettingContainer, "position", Vector2(((screen.x / 2) - $SettingContainer.size.x / 2), (screen.y / 2) - $SettingContainer.size.y / 2  + screen.y), 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		#tween2.tween_property($Background2, "self_modulate", Vector4(0.0, 0.0, 0.0, 0.0), 0.2)
+		await tween.finished
+		$Background2.hide()
+		is_setting_open = false
+
+
+func _on_text_small_maker_pressed() -> void:
+	if $TextEdit.focus_mode and is_scrolled_up:
+		print("trying to exit out of focus")
+		var tween = create_tween()
+		tween.tween_property(textedit, "size", Vector2(old_height.x, old_height.y), 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		is_scrolled_up = false
+
+
+func _on_item_list_item_clicked(index: int, _at_position: Vector2, _mouse_button_index: int) -> void:
+	propertymenu = true
+	var tween = create_tween()
+	$Background3.show()
+	var propertytochange = $SettingContainer/ItemList.get_item_text(index)
+	tween.tween_property($Changer, "position", Vector2(screen.x / 2 - $Changer.size.x / 2, (screen.y /2 - $Changer.size.y / 2)), 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	$Changer/RichTextLabel.text= propertytochange
+
+
+func _on_propertyexitbutton_pressed() -> void:
+	if propertymenu:
+		var tween = create_tween()
+		tween.tween_property($Changer, "position", Vector2(screen.x / 2 - $Changer.size.x / 2, (screen.y /2 - $Changer.size.y / 2) + screen.y + 150), 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		await tween.finished
+		$Background3.hide()
+		propertymenu = false
