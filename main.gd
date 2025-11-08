@@ -15,9 +15,18 @@ var messages = [
 	"Tejas jaisi ho kya ap"
 	]
 var _last_number: int = -1 
-
+const baseres: Vector2 = Vector2(1920, 1080)
 
 func _ready():
+	var scale_factor_vec = screen / baseres
+	var scale_factor = ((scale_factor_vec.x/2) + scale_factor_vec.y) * 0.5
+	$RichTextLabel.add_theme_font_size_override("normal_font_size", (200 * scale_factor))
+	$Panel/RichTextLabel.add_theme_font_size_override("normal_font_size", (76 * scale_factor))
+	$Panel/LineEdit.add_theme_font_size_override("font_size", (66 * scale_factor))
+	$Panel/Create.add_theme_font_size_override("font_size", (41 * scale_factor))
+	$Panel/Button2.add_theme_font_size_override("font_size", (36 * scale_factor))
+	
+	
 	$ColorRect.set_instance_shader_parameter("Bar Width", 0.1)
 	get_viewport().connect("size_changed", Callable(self, "_on_screen_resized"))
 	panel.show()
@@ -36,6 +45,14 @@ func _ready():
 
 func _on_screen_resized():
 	screen = DisplayServer.window_get_size()
+	var scale_factor_vec = screen / baseres
+	var scale_factor = (scale_factor_vec.x + scale_factor_vec.y) * 0.5
+	$RichTextLabel.add_theme_font_size_override("normal_font_size", (200 * scale_factor))
+	$Panel/RichTextLabel.add_theme_font_size_override("normal_font_size", (76 * scale_factor))
+	$Panel/LineEdit.add_theme_font_size_override("font_size", (66 * scale_factor))
+	$Panel/Create.add_theme_font_size_override("font_size", (41 * scale_factor))
+	$Panel/Button2.add_theme_font_size_override("font_size", (36 * scale_factor))
+
 
 func populate_itemlist():
 	var dir = DirAccess.open(notes_folder)
@@ -100,7 +117,6 @@ func _on_create_pressed() -> void:
 			is_newscreenopen = false
 	else:
 		line.placeholder_text = messages[rand_no_repeat(0, len(messages) - 1)]
-
 
 
 func rand_no_repeat(min_val: int, max_val: int) -> int:

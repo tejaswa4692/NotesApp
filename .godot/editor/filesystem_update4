@@ -1,3 +1,8 @@
 res://read.tscn
 res://background.gdshader
 res://shader.tres
+res://main.tscn
+res://main.gd
+res://read.gd
+res://GlobalScript.gd
+res://texteditpanelcolor.tres
