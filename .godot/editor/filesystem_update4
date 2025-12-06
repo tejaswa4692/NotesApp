@@ -1,8 +1,8 @@
 res://read.tscn
+res://texteditpanelcolor.tres
 res://background.gdshader
 res://shader.tres
-res://main.tscn
-res://main.gd
 res://read.gd
-res://GlobalScript.gd
-res://texteditpanelcolor.tres
+res://main.tscn
+res://Builds/comand.txt
+res://main.gd

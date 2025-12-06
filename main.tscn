@@ -20,17 +20,17 @@ corner_radius_bottom_left = 90
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c57u"]
 bg_color = Color(0.684216, 0.415761, 0.467356, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kek77"]
 bg_color = Color(0.552945, 0.316438, 0.363353, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 bg_color = Color(0.622659, 0.358569, 0.390856, 1)
@@ -115,7 +115,7 @@ metadata/_edit_lock_ = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
-anchor_top = 0.2
+anchor_top = 0.147
 anchor_right = 0.95
 anchor_bottom = 0.86
 grow_horizontal = 2
@@ -135,9 +135,9 @@ item_1/text = "hello"
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.2
+anchor_left = 0.3
 anchor_top = 0.9
-anchor_right = 0.8
+anchor_right = 0.7
 anchor_bottom = 0.99
 grow_horizontal = 2
 grow_vertical = 2
@@ -169,13 +169,13 @@ anchor_left = 0.212
 anchor_top = 0.138
 anchor_right = 0.785
 anchor_bottom = 0.391
-offset_left = 0.331985
-offset_top = 0.00799561
-offset_right = 0.259949
-offset_bottom = -0.144012
+offset_left = -197.168
+offset_top = -0.311996
+offset_right = 210.76
+offset_bottom = -0.884003
 grow_horizontal = 2
 theme_override_fonts/normal_font = ExtResource("1_ig7tw")
-theme_override_font_sizes/normal_font_size = 76
+theme_override_font_sizes/normal_font_size = 60
 text = "Create Note"
 scroll_active = false
 horizontal_alignment = 1
@@ -202,14 +202,12 @@ placeholder_text = "Enter File Name"
 [node name="Create" type="Button" parent="Panel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.401
+anchor_left = 0.344
 anchor_top = 0.753
-anchor_right = 0.598
+anchor_right = 0.652
 anchor_bottom = 0.914
-offset_left = 0.0359802
 offset_top = -0.152008
-offset_right = -0.172058
-offset_bottom = 0.0239868
+offset_bottom = 0.0239563
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -225,14 +223,13 @@ text = "Create"
 [node name="Button2" type="Button" parent="Panel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.89
+anchor_left = 0.857
 anchor_top = 0.083
 anchor_right = 0.951
 anchor_bottom = 0.229
-offset_left = 0.039978
 offset_top = 0.127998
 offset_right = 0.335999
-offset_bottom = 0.0639954
+offset_bottom = 0.0639877
 grow_horizontal = 0
 theme_override_fonts/font = ExtResource("1_ig7tw")
 theme_override_font_sizes/font_size = 36
@@ -260,6 +257,21 @@ fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.15
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.53623, 0.259379, 0.26393, 1)
+theme_override_fonts/normal_font = ExtResource("1_ig7tw")
+theme_override_font_sizes/normal_font_size = 45
+text = "Made w/h Love for my baby"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 2
 
 [connection signal="item_clicked" from="ItemList" to="." method="_on_item_list_item_clicked"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

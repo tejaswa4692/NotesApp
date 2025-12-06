@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cl1en4lbbdffo"]
+[gd_scene load_steps=38 format=3 uid="uid://cl1en4lbbdffo"]
 
 [ext_resource type="FontFile" uid="uid://sks63ere33r2" path="res://Pixelify_Sans/static/PixelifySans-Regular.ttf" id="1_spbdu"]
 [ext_resource type="Script" uid="uid://cujrkruilc7qd" path="res://read.gd" id="1_vhvs7"]
@@ -113,6 +113,13 @@ corner_radius_top_right = 80
 corner_radius_bottom_right = 80
 corner_radius_bottom_left = 80
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxyef"]
+bg_color = Color(0.707768, 0.38817, 0.313677, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
 [node name="Read" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -150,28 +157,23 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_gahvv")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_gahvv")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_gahvv")
 
-[node name="TextEdit" type="TextEdit" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.035
-anchor_top = 0.115
-anchor_right = 0.965
-anchor_bottom = 0.975
+anchor_left = 0.04
+anchor_top = 0.09
+anchor_right = 0.96
+anchor_bottom = 0.98
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextEdit" type="TextEdit" parent="MarginContainer"]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.572969, 0.323329, 0.318556, 1)
 theme_override_fonts/font = SubResource("FontVariation_b6fi6")
 theme_override_font_sizes/font_size = 150
 theme_override_styles/normal = ExtResource("4_ugbt2")
-text = "HIIIIIIII HELLOOO
- HELLO
-HELLOOO
-HELLOOO
-HELLOOO
-HELLOOO
-HELLOOO
-HELLOOO
-HELLOOO"
+theme_override_styles/read_only = ExtResource("4_ugbt2")
 wrap_mode = 1
 autowrap_mode = 2
 scroll_smooth = true
@@ -293,7 +295,7 @@ theme_override_styles/cursor = SubResource("StyleBoxEmpty_ugbt2")
 item_count = 4
 item_0/text = "Font Size"
 item_1/text = "Font Color"
-item_2/text = "Background"
+item_2/text = "Bg Theme"
 item_3/text = "Panel Color"
 
 [node name="Background3" type="Panel" parent="."]
@@ -424,6 +426,7 @@ anchor_right = 0.8
 anchor_bottom = 0.795
 grow_horizontal = 2
 grow_vertical = 2
+toggle_mode = false
 color = Color(0.572549, 0.321569, 0.317647, 1)
 edit_alpha = false
 
@@ -451,6 +454,7 @@ fit_content = true
 scroll_active = false
 
 [node name="PanelColor" type="Control" parent="Changer"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -486,6 +490,40 @@ offset_right = -0.00650024
 offset_bottom = 0.0344849
 grow_horizontal = 2
 grow_vertical = 2
+toggle_mode = false
+
+[node name="ThemeColor" type="Control" parent="Changer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Changer/ThemeColor"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_top = 0.3
+anchor_right = 0.85
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kxyef")
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Changer/ThemeColor"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.36
+anchor_right = 0.75
+anchor_bottom = 0.75
+offset_left = -0.0350037
+offset_top = 0.339996
+grow_horizontal = 2
+grow_vertical = 2
+toggle_mode = false
 
 [connection signal="pressed" from="TextSmallMaker" to="." method="_on_text_small_maker_pressed"]
 [connection signal="pressed" from="Save" to="." method="_on_save_pressed"]
@@ -505,3 +543,6 @@ grow_vertical = 2
 [connection signal="color_changed" from="Changer/PanelColor/Panel/panelcolorpicker" to="." method="_on_panelcolorpicker_color_changed"]
 [connection signal="picker_created" from="Changer/PanelColor/Panel/panelcolorpicker" to="." method="_on_panelcolorpicker_picker_created"]
 [connection signal="popup_closed" from="Changer/PanelColor/Panel/panelcolorpicker" to="." method="_on_panelcolorpicker_popup_closed"]
+[connection signal="color_changed" from="Changer/ThemeColor/ColorPickerButton" to="." method="_on_theme_color_changed"]
+[connection signal="picker_created" from="Changer/ThemeColor/ColorPickerButton" to="." method="_on_color_picker_button_picker_created"]
+[connection signal="popup_closed" from="Changer/ThemeColor/ColorPickerButton" to="." method="_on_color_picker_button_popup_closed"]

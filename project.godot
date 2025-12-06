@@ -13,6 +13,10 @@ config_version=5
 config/name="Notes_app"
 run/main_scene="uid://b2k8db16jd8xf"
 config/features=PackedStringArray("4.4", "Mobile")
+boot_splash/bg_color=Color(0.857886, 0.674385, 0.650167, 1)
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+boot_splash/image="uid://c3ofyqylggsco"
 config/icon="res://icon.svg"
 
 [autoload]

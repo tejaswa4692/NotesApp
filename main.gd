@@ -20,8 +20,9 @@ const baseres: Vector2 = Vector2(1920, 1080)
 func _ready():
 	var scale_factor_vec = screen / baseres
 	var scale_factor = ((scale_factor_vec.x/2) + scale_factor_vec.y) * 0.5
-	$RichTextLabel.add_theme_font_size_override("normal_font_size", (200 * scale_factor))
-	$Panel/RichTextLabel.add_theme_font_size_override("normal_font_size", (76 * scale_factor))
+	$RichTextLabel.add_theme_font_size_override("normal_font_size", (150 * scale_factor))
+	$RichTextLabel2.add_theme_font_size_override("normal_font_size", (45 * scale_factor))
+	$Panel/RichTextLabel.add_theme_font_size_override("normal_font_size", (60 * scale_factor))
 	$Panel/LineEdit.add_theme_font_size_override("font_size", (66 * scale_factor))
 	$Panel/Create.add_theme_font_size_override("font_size", (41 * scale_factor))
 	$Panel/Button2.add_theme_font_size_override("font_size", (36 * scale_factor))
@@ -47,8 +48,9 @@ func _on_screen_resized():
 	screen = DisplayServer.window_get_size()
 	var scale_factor_vec = screen / baseres
 	var scale_factor = (scale_factor_vec.x + scale_factor_vec.y) * 0.5
-	$RichTextLabel.add_theme_font_size_override("normal_font_size", (200 * scale_factor))
-	$Panel/RichTextLabel.add_theme_font_size_override("normal_font_size", (76 * scale_factor))
+	$RichTextLabel.add_theme_font_size_override("normal_font_size", (150 * scale_factor))
+	$RichTextLabel2.add_theme_font_size_override("normal_font_size", (45 * scale_factor))
+	$Panel/RichTextLabel.add_theme_font_size_override("normal_font_size", (60 * scale_factor))
 	$Panel/LineEdit.add_theme_font_size_override("font_size", (66 * scale_factor))
 	$Panel/Create.add_theme_font_size_override("font_size", (41 * scale_factor))
 	$Panel/Button2.add_theme_font_size_override("font_size", (36 * scale_factor))
@@ -71,6 +73,9 @@ func create_note_file(title: String, content: String) -> void:
 	var note_data = {
 		"title": title,
 		"content": content,
+		"fontsize" : 50,
+		"fontcolor": [0.57, 0.32, 0.31, 1.00],
+		"panelcolor": [0.80, 0.64, 0.65, 1.00]
 	}
 	# Construct full path
 	var file_path = "user://notes/%s.json" % title
@@ -109,14 +114,21 @@ func _on_item_list_item_clicked(index: int, _at_position: Vector2, _mouse_button
 
 
 func _on_create_pressed() -> void:
-	if line.text != "":
-		create_note_file(line.text, "")
-		if is_newscreenopen:
-			var tween = create_tween()
-			tween.tween_property(panel, "position", Vector2(screen.x / 2 - panel.size.x / 2, (screen.y /2 - panel.size.y / 2) + screen.y *2), 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-			is_newscreenopen = false
+	var file_path = "user://notes/%s.json" % line.text
+	if FileAccess.file_exists(file_path):
+		line.placeholder_text = "Filename exist"
+		line.text = ""
 	else:
-		line.placeholder_text = messages[rand_no_repeat(0, len(messages) - 1)]
+		if line.text != "":
+			
+			create_note_file(line.text, "")
+			
+			if is_newscreenopen:
+				var tween = create_tween()
+				tween.tween_property(panel, "position", Vector2(screen.x / 2 - panel.size.x / 2, (screen.y /2 - panel.size.y / 2) + screen.y *2), 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+				is_newscreenopen = false
+		else:
+			line.placeholder_text = messages[rand_no_repeat(0, len(messages) - 1)]
 
 
 func rand_no_repeat(min_val: int, max_val: int) -> int:

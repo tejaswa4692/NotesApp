@@ -5,13 +5,11 @@ extends Control
 @onready var filepath = "user://notes/%s.json" % Global.filename
 var text: Dictionary
 @onready var changer = $Changer
-@onready var bg2col = $Background2.get_theme_color("panel")
 var fontsize
 @onready var screen: Vector2 = DisplayServer.window_get_size()
 var showchanger: bool = false
-@onready var old_height = $TextEdit.size
-@onready var textedit = $TextEdit
-@onready var kb_height = DisplayServer.virtual_keyboard_get_height()
+@onready var old_height = $MarginContainer.size
+@onready var textedit = $MarginContainer/TextEdit
 var is_setting_open: bool = false
 var is_scrolled_up: bool = false
 var propertymenu: bool = false
@@ -21,11 +19,21 @@ var fontcolor
 var panelcolor = Color(0.808, 0.647, 0.651, 1.0)
 
 
+var keybheight: int = 0:
+	set = keyblogic
+
+func keyblogic(new_keyb_height: int):
+	$MarginContainer.size.y = old_height.y - new_keyb_height
+	keybheight = new_keyb_height
+	
 
 func _ready() -> void:
-	
+	$ColorRect.color = Color(1, 1, 1, 1)
 	
 	# Init
+	$ColorRect.material = $ColorRect.material.duplicate()
+	
+	
 	$Changer/FontSizeProperty.hide()
 	$Changer/FontColorProperty.hide()
 	$Changer/BackgroundSelector.hide()
@@ -53,7 +61,7 @@ func _ready() -> void:
 	$SettingContainer.position.y = (screen.y / 2) - $SettingContainer.size.y / 2  + screen.y
 	
 	
-	#fontsize = $TextEdit.get_theme_font_size("font_size")
+	#fontsize = textedit.get_theme_font_size("font_size")
 	
 	
 	readcontents(filepath)
@@ -72,11 +80,12 @@ func readcontents(path: String) -> void:
 	var json_text = JSON.parse_string(file.get_as_text()) 
 	
 	
-	$TextEdit.add_theme_font_size_override("font_size", json_text["fontsize"])
-	$TextEdit.text = json_text["content"]
+	textedit.add_theme_font_size_override("font_size", json_text["fontsize"])
+	textedit.text = json_text["content"]
 	$Changer/FontSizeProperty/fontsizeslider.value = json_text["fontsize"]
 	fontcolor = Color(json_text["fontcolor"][0], json_text["fontcolor"][1], json_text["fontcolor"][2], json_text["fontcolor"][3])
-	$TextEdit.add_theme_color_override("font_color", fontcolor)
+	textedit.add_theme_color_override("font_color", fontcolor)
+	textedit.add_theme_color_override("font_readonly_color", fontcolor)
 	$Changer/FontColorProperty/Panel/ColorPickerButton.color = fontcolor
 	panelcolor = Color(json_text["panelcolor"][0], json_text["panelcolor"][1], json_text["panelcolor"][2], json_text["panelcolor"][3])
 	paneltheme.bg_color = panelcolor
@@ -94,25 +103,8 @@ func save_json(file_path: String, data: Dictionary) -> void:
 	file.close()
  
 
-func textedit_focus_entered():
-	is_scrolled_up = true
-	await get_tree().create_timer(0.2).timeout
-	var keyb_height = DisplayServer.virtual_keyboard_get_height()
-	#var keyb_height = 500
-	if keyb_height > 0:
-		var tween = create_tween()
-		tween.tween_property(textedit, "size", Vector2(old_height.x, textedit.size.y - keyb_height - 100), 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		await tween.finished
-		tween.kill()
-	#textedit.size.y = textedit.size.y - keyb_height - 100
-
-
-func textedit_focus_exited():
-	textedit.size.y = old_height.y
-
-
 func _on_save_pressed() -> void:
-	savecontents($TextEdit.text)
+	savecontents(textedit.text)
 
 
 func _on_back_pressed() -> void:
@@ -151,6 +143,7 @@ func _on_changer_mouse_exited() -> void:
 #this function opens the settings container 
 func _on_properties_pressed() -> void:
 	if !is_setting_open:
+		textedit.editable = false
 		$Background2.show()
 		var tween = create_tween()
 		$SettingContainer.show()
@@ -160,6 +153,7 @@ func _on_properties_pressed() -> void:
 
 func _on_backgroundexitbutton_pressed() -> void:
 	if is_setting_open and !propertymenu:
+		textedit.editable = true
 		var tween = create_tween()
 		tween.tween_property($SettingContainer, "position", Vector2(((screen.x / 2) - $SettingContainer.size.x / 2), (screen.y / 2) - $SettingContainer.size.y / 2  + screen.y), 0.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		#tween2.tween_property($Background2, "self_modulate", Vector4(0.0, 0.0, 0.0, 0.0), 0.2)
@@ -169,7 +163,7 @@ func _on_backgroundexitbutton_pressed() -> void:
 
 
 func _on_text_small_maker_pressed() -> void:
-	if $TextEdit.focus_mode and is_scrolled_up:
+	if textedit.focus_mode and is_scrolled_up:
 		var tween = create_tween()
 		tween.tween_property(textedit, "size", Vector2(old_height.x, old_height.y), 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		is_scrolled_up = false
@@ -190,21 +184,35 @@ func _on_item_list_item_clicked(index: int, _at_position: Vector2, _mouse_button
 			$Changer/FontColorProperty.hide()
 			$Changer/BackgroundSelector.hide()
 			$Changer/PanelColor.hide()
+			$Changer/ThemeColor.hide()
 		"Font Color":
 			$Changer/FontSizeProperty.hide()
 			$Changer/FontColorProperty.show()
 			$Changer/BackgroundSelector.hide()
 			$Changer/PanelColor.hide()
-		"Background":
+			$Changer/ThemeColor.hide()
+		"Bg Theme":
 			$Changer/FontSizeProperty.hide()
 			$Changer/FontColorProperty.hide()
 			$Changer/BackgroundSelector.show()
 			$Changer/PanelColor.hide()
+			$Changer/ThemeColor.hide()
 		"Panel Color":
 			$Changer/FontSizeProperty.hide()
 			$Changer/FontColorProperty.hide()
 			$Changer/BackgroundSelector.hide()
 			$Changer/PanelColor.show()
+			$Changer/ThemeColor.hide()
+		"Theme Color":
+			$Changer/FontSizeProperty.hide()
+			$Changer/FontColorProperty.hide()
+			$Changer/BackgroundSelector.hide()
+			$Changer/PanelColor.hide()
+			$Changer/ThemeColor.show()
+
+
+func _process(delta: float) -> void:
+	keybheight = DisplayServer.virtual_keyboard_get_height()
 
 
 func _on_propertyexitbutton_pressed() -> void:
@@ -216,7 +224,13 @@ func _on_propertyexitbutton_pressed() -> void:
 		propertymenu = false
 
 
-
+#func _notification(what):
+	#if what == NOTIFICATION_VIRTUAL_KEYBOARD_VISIBLE_CHANGED:
+		#var h = DisplayServer.virtual_keyboard_get_height()
+		#if h > 0:
+			#text_edit.size.y = original_size.y - h
+		#else:
+			#text_edit.size = original_size
 
 
 #code responsible for hiding the ui elements when the slider is held
@@ -249,13 +263,17 @@ func fade_in_panel(panel: Panel, duration: float = 0.2) -> void:
 
 
 func _on_fontsizeslider_value_changed(value: float) -> void:
-	$TextEdit.add_theme_font_size_override("font_size", value)
+	textedit.add_theme_font_size_override("font_size", value)
 	fontsize = value
 
 
 func _on_color_picker_button_color_changed(color: Color) -> void:
-	$TextEdit.add_theme_color_override("font_color", color)
+	textedit.add_theme_color_override("font_color", color)
+	textedit.add_theme_color_override("font_readonly_color", color)
 	fontcolor = color
+	fade_out_panel($Background3)
+	fade_out_panel($SettingContainer)
+	fade_out_panel($Background2)
 
 func _on_color_picker_button_picker_created() -> void:
 	fade_out_panel($Background3)
@@ -285,3 +303,14 @@ func _on_panelcolorpicker_color_changed(color: Color) -> void:
 	paneltheme.bg_color = color
 	paneltheme.border_color = color
 	panelcolor = color
+	fade_out_panel($Background3)
+	fade_out_panel($SettingContainer)
+	fade_out_panel($Background2)
+
+
+func _on_theme_color_changed(color: Color) -> void:
+	print($ColorRect.get_instance_shader_parameter("color2"))
+	$ColorRect.set_instance_shader_parameter("color2", Vector4(color.r, color.g, color.b, color.a))
+	fade_out_panel($Background3)
+	fade_out_panel($SettingContainer)
+	fade_out_panel($Background2)
