@@ -175,7 +175,6 @@ theme_override_font_sizes/font_size = 150
 theme_override_styles/normal = ExtResource("4_ugbt2")
 theme_override_styles/read_only = ExtResource("4_ugbt2")
 wrap_mode = 1
-autowrap_mode = 2
 scroll_smooth = true
 
 [node name="Save" type="Button" parent="."]
