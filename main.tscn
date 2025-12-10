@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b2k8db16jd8xf"]
+[gd_scene load_steps=30 format=3 uid="uid://b2k8db16jd8xf"]
 
 [ext_resource type="Script" uid="uid://bopqe3bfsibqa" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="FontFile" uid="uid://sks63ere33r2" path="res://Pixelify_Sans/static/PixelifySans-Regular.ttf" id="1_ig7tw"]
@@ -90,6 +90,31 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ycdy4"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5vw27"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kek77"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4c57u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dg77c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w48qg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vivmo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2cqfq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yaehf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_074og"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efxa6"]
+bg_color = Color(0.463246, 0.222122, 0.246585, 1)
+corner_radius_top_left = 90
+corner_radius_top_right = 90
+corner_radius_bottom_right = 90
+corner_radius_bottom_left = 90
+
 [node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -132,12 +157,29 @@ icon_scale = 5.0
 item_0/text = "hi"
 item_1/text = "hello"
 
-[node name="Button" type="Button" parent="."]
+[node name="DeleteMenuOpener" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.3
+anchor_left = 0.569
 anchor_top = 0.9
-anchor_right = 0.7
+anchor_right = 0.836
+anchor_bottom = 0.99
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 71
+theme_override_styles/focus = SubResource("StyleBoxEmpty_272bh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4c57u")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kek77")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c57u")
+text = "Delete"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.128
+anchor_top = 0.9
+anchor_right = 0.4
 anchor_bottom = 0.99
 grow_horizontal = 2
 grow_vertical = 2
@@ -150,6 +192,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_4c57u")
 text = "New"
 
 [node name="Panel" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -243,6 +286,180 @@ theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_ycdy4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_272bh")
 text = "X"
 
+[node name="Delete" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.245
+anchor_right = 0.9
+anchor_bottom = 0.754
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h2yge")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Delete"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.216
+anchor_top = 0.048
+anchor_right = 0.774
+anchor_bottom = 0.138
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("1_ig7tw")
+theme_override_font_sizes/normal_font_size = 60
+text = "Delete Note"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="DelButton" type="Button" parent="Delete"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.344
+anchor_top = 0.874
+anchor_right = 0.652
+anchor_bottom = 0.964
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 41
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1bvp3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lquwl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7mycd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lquwl")
+text = "Delete"
+
+[node name="DeleteList" type="ItemList" parent="Delete"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.15
+anchor_right = 0.95
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/guide_color = Color(0.622199, 0.239685, 0.278146, 1)
+theme_override_colors/font_selected_color = Color(0.968885, 0.845235, 0.831643, 1)
+theme_override_colors/font_color = Color(0.950482, 0.755375, 0.734928, 1)
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 56
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5vw27")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_kek77")
+theme_override_styles/hovered = SubResource("StyleBoxEmpty_4c57u")
+theme_override_styles/hovered_selected = SubResource("StyleBoxEmpty_dg77c")
+theme_override_styles/hovered_selected_focus = SubResource("StyleBoxEmpty_w48qg")
+theme_override_styles/selected = SubResource("StyleBoxEmpty_vivmo")
+theme_override_styles/selected_focus = SubResource("StyleBoxEmpty_2cqfq")
+theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_yaehf")
+theme_override_styles/cursor = SubResource("StyleBoxEmpty_074og")
+allow_search = false
+
+[node name="DeleteMenuClose" type="Button" parent="Delete"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.857
+anchor_top = 0.041
+anchor_right = 0.951
+anchor_bottom = 0.123
+offset_left = -6.10352e-05
+offset_right = 0.335999
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lquwl")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_7mycd")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_272bh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_272bh")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_efxa6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5vw27")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_ycdy4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_272bh")
+text = "X"
+
+[node name="Confirm_Delete" type="Panel" parent="Delete"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.191
+anchor_right = 0.9
+anchor_bottom = 0.736
+offset_right = -6.10352e-05
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_efxa6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Delete/Confirm_Delete"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.044
+anchor_top = 0.048
+anchor_right = 0.949
+anchor_bottom = 0.345
+offset_top = 0.349353
+offset_bottom = -0.114037
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("1_ig7tw")
+theme_override_font_sizes/normal_font_size = 60
+text = "Confirm Delete?"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="GoBack" type="Button" parent="Delete/Confirm_Delete"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.574
+anchor_top = 0.735
+anchor_right = 0.9
+anchor_bottom = 0.919
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 41
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1bvp3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lquwl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7mycd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lquwl")
+text = "Oop No"
+
+[node name="Name_Of_File" type="RichTextLabel" parent="Delete/Confirm_Delete"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.35
+anchor_right = 0.98
+anchor_bottom = 0.7
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_ig7tw")
+theme_override_font_sizes/normal_font_size = 60
+text = "Delete"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfirmDelete" type="Button" parent="Delete/Confirm_Delete"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.735
+anchor_right = 0.45
+anchor_bottom = 0.919
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_ig7tw")
+theme_override_font_sizes/font_size = 41
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1bvp3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lquwl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7mycd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lquwl")
+text = "Yes i confirm"
+
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -274,6 +491,11 @@ horizontal_alignment = 1
 vertical_alignment = 2
 
 [connection signal="item_clicked" from="ItemList" to="." method="_on_item_list_item_clicked"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="DeleteMenuOpener" to="." method="_on_delete_menu_opener_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Panel/Create" to="." method="_on_create_pressed"]
 [connection signal="pressed" from="Panel/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="item_clicked" from="Delete/DeleteList" to="." method="_on_delete_list_item_clicked"]
+[connection signal="pressed" from="Delete/DeleteMenuClose" to="." method="_on_delete_menu_close_pressed"]
+[connection signal="pressed" from="Delete/Confirm_Delete/GoBack" to="." method="_on_go_back_pressed"]
+[connection signal="pressed" from="Delete/Confirm_Delete/ConfirmDelete" to="." method="_on_confirm_delete_pressed"]

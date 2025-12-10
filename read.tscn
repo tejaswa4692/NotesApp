@@ -252,7 +252,6 @@ theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_ciyjt")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ciyjt")
 
 [node name="SettingContainer" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
