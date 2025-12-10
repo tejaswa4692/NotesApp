@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://sks63ere33r2" path="res://Pixelify_Sans/static/PixelifySans-Regular.ttf" id="1_spbdu"]
 [ext_resource type="Script" uid="uid://cujrkruilc7qd" path="res://read.gd" id="1_vhvs7"]
-[ext_resource type="Material" uid="uid://d2qdm1byirqow" path="res://shader.tres" id="2_b6fi6"]
+[ext_resource type="Material" uid="uid://77e4trguic72" path="res://shaders/shader2.tres" id="2_ugbt2"]
 [ext_resource type="Texture2D" uid="uid://d086khqoyp8sn" path="res://slider.png" id="4_jy06v"]
 [ext_resource type="StyleBox" uid="uid://lnq5siffjvby" path="res://texteditpanelcolor.tres" id="4_ugbt2"]
 
@@ -44,7 +44,7 @@ bg_color = Color(0, 0, 0, 0.792157)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ciyjt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6fi6"]
-bg_color = Color(0.785494, 0.583224, 0.526029, 1)
+bg_color = Color(1, 0.762916, 0.694775, 1)
 corner_radius_top_left = 90
 corner_radius_top_right = 90
 corner_radius_bottom_right = 90
@@ -130,7 +130,7 @@ grow_vertical = 2
 script = ExtResource("1_vhvs7")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-material = ExtResource("2_b6fi6")
+material = ExtResource("2_ugbt2")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -157,18 +157,13 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_gahvv")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_gahvv")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_gahvv")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="TextEdit" type="TextEdit" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.04
 anchor_top = 0.09
 anchor_right = 0.96
 anchor_bottom = 0.98
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextEdit" type="TextEdit" parent="MarginContainer"]
-layout_mode = 2
 theme_override_colors/font_color = Color(0.572969, 0.323329, 0.318556, 1)
 theme_override_fonts/font = SubResource("FontVariation_b6fi6")
 theme_override_font_sizes/font_size = 150
@@ -277,9 +272,9 @@ anchor_right = 0.95
 anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/guide_color = Color(0.492709, 0.258911, 0.0862561, 0.529412)
-theme_override_colors/font_selected_color = Color(0.619608, 0.27451, 0.247059, 1)
-theme_override_colors/font_color = Color(0.61951, 0.27527, 0.24865, 1)
+theme_override_colors/guide_color = Color(1, 0.666444, 0.574338, 1)
+theme_override_colors/font_selected_color = Color(0.756863, 0.356863, 0.333333, 1)
+theme_override_colors/font_color = Color(0.758239, 0.358062, 0.332098, 1)
 theme_override_fonts/font = ExtResource("1_spbdu")
 theme_override_font_sizes/font_size = 81
 theme_override_styles/focus = SubResource("StyleBoxEmpty_jy06v")
@@ -453,7 +448,6 @@ fit_content = true
 scroll_active = false
 
 [node name="PanelColor" type="Control" parent="Changer"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -523,6 +517,25 @@ offset_top = 0.339996
 grow_horizontal = 2
 grow_vertical = 2
 toggle_mode = false
+
+[node name="PageNumber" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -156.0
+offset_top = -77.0
+offset_right = -18.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/default_color = Color(0.836193, 0.414738, 0.472432, 1)
+theme_override_fonts/normal_font = ExtResource("1_spbdu")
+theme_override_font_sizes/normal_font_size = 70
+text = "1"
+scroll_active = false
+horizontal_alignment = 2
 
 [connection signal="pressed" from="TextSmallMaker" to="." method="_on_text_small_maker_pressed"]
 [connection signal="pressed" from="Save" to="." method="_on_save_pressed"]

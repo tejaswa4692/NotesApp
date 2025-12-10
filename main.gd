@@ -18,14 +18,7 @@ var _last_number: int = -1
 const baseres: Vector2 = Vector2(1920, 1080)
 
 func _ready():
-	var scale_factor_vec = screen / baseres
-	var scale_factor = ((scale_factor_vec.x/2) + scale_factor_vec.y) * 0.5
-	$RichTextLabel.add_theme_font_size_override("normal_font_size", (150 * scale_factor))
-	$RichTextLabel2.add_theme_font_size_override("normal_font_size", (45 * scale_factor))
-	$Panel/RichTextLabel.add_theme_font_size_override("normal_font_size", (60 * scale_factor))
-	$Panel/LineEdit.add_theme_font_size_override("font_size", (66 * scale_factor))
-	$Panel/Create.add_theme_font_size_override("font_size", (41 * scale_factor))
-	$Panel/Button2.add_theme_font_size_override("font_size", (36 * scale_factor))
+	resize_everything()
 	
 	
 	$ColorRect.set_instance_shader_parameter("Bar Width", 0.1)
@@ -46,14 +39,20 @@ func _ready():
 
 func _on_screen_resized():
 	screen = DisplayServer.window_get_size()
+	resize_everything()
+
+
+
+func resize_everything():
 	var scale_factor_vec = screen / baseres
-	var scale_factor = (scale_factor_vec.x + scale_factor_vec.y) * 0.5
+	var scale_factor = ((scale_factor_vec.x/2) + scale_factor_vec.y) * 0.5
 	$RichTextLabel.add_theme_font_size_override("normal_font_size", (150 * scale_factor))
 	$RichTextLabel2.add_theme_font_size_override("normal_font_size", (45 * scale_factor))
 	$Panel/RichTextLabel.add_theme_font_size_override("normal_font_size", (60 * scale_factor))
 	$Panel/LineEdit.add_theme_font_size_override("font_size", (66 * scale_factor))
 	$Panel/Create.add_theme_font_size_override("font_size", (41 * scale_factor))
 	$Panel/Button2.add_theme_font_size_override("font_size", (36 * scale_factor))
+
 
 
 func populate_itemlist():

@@ -1,15 +1,15 @@
 extends Control
 
 
-@onready var filename = Global.filename
-@onready var filepath = "user://notes/%s.json" % Global.filename
+@onready var filename: String = Global.filename
+@onready var filepath: String = "user://notes/%s.json" % Global.filename
 var text: Dictionary
 @onready var changer = $Changer
 var fontsize
 @onready var screen: Vector2 = DisplayServer.window_get_size()
 var showchanger: bool = false
-@onready var old_height = $MarginContainer.size
-@onready var textedit = $MarginContainer/TextEdit
+@onready var old_height = $TextEdit.size
+@onready var textedit = $TextEdit
 var is_setting_open: bool = false
 var is_scrolled_up: bool = false
 var propertymenu: bool = false
@@ -19,13 +19,38 @@ var fontcolor
 var panelcolor = Color(0.808, 0.647, 0.651, 1.0)
 
 
+
+var swipe_start_position: Vector2 = Vector2()
+const min_swipe_distance: int = 50  # Minimum distance to count as swipe
+const max_swipe_time = 0.5  # Maximum time for swipe
+var swipe_start_time = 0
+var text_list = []
+
+var pagenumber
+
+var currentpage = 1:
+	set = pagehandler
+
+func pagehandler(newpage):
+	if ((newpage > currentpage and textedit.text != "") or (newpage <= currentpage)) and not(newpage < 1):
+		text_list[currentpage - 1] = textedit.text
+		if newpage > len(text_list):
+			text_list.append("")
+		$PageNumber.text = str(newpage)
+		textedit.text = text_list[newpage - 1]
+		currentpage = newpage
+
+func swipe(newpage):
+	if newpage > currentpage:
+		pass
+	
+
 var keybheight: int = 0:
 	set = keyblogic
 
 func keyblogic(new_keyb_height: int):
-	$MarginContainer.size.y = old_height.y - new_keyb_height
+	$TextEdit.size.y = old_height.y - new_keyb_height
 	keybheight = new_keyb_height
-	
 
 func _ready() -> void:
 	$ColorRect.color = Color(1, 1, 1, 1)
@@ -66,9 +91,38 @@ func _ready() -> void:
 	
 	readcontents(filepath)
 
+#checking for swiping function here
+func _input(event):
+	# Detect touch/mouse press start
+	if event is InputEventScreenTouch and event.pressed:
+		swipe_start_position = event.position
+		swipe_start_time = Time.get_ticks_msec() / 1000.0
+	
+	# Detect touch/mouse release
+	elif event is InputEventScreenTouch and not event.pressed:
+		var swipe_end_position = event.position
+		var swipe_end_time = Time.get_ticks_msec() / 1000.0
+		
+		# Calculate swipe distance and time
+		var swipe_distance = swipe_end_position - swipe_start_position
+		var swipe_time = swipe_end_time - swipe_start_time
+		
+		# Check if it's a valid swipe
+		if abs(swipe_distance.x) > min_swipe_distance and swipe_time < max_swipe_time:
+			if swipe_distance.x > 0:
+				on_swipe_right()
+			else:
+				on_swipe_left()
 
-func savecontents(data: String) -> void:
-	var newdata = {"title": filename, "content": data, "fontsize": fontsize, "fontcolor": [fontcolor.r, fontcolor.g, fontcolor.b, fontcolor.a], "panelcolor": [panelcolor.r, panelcolor.g, panelcolor.b, panelcolor.a]}
+func on_swipe_right():
+	currentpage -= 1
+
+
+func on_swipe_left():
+	currentpage += 1
+
+func savecontents(data: Array) -> void:
+	var newdata = {"title": filename, "content_list": data, "fontsize": fontsize, "fontcolor": [fontcolor.r, fontcolor.g, fontcolor.b, fontcolor.a], "panelcolor": [panelcolor.r, panelcolor.g, panelcolor.b, panelcolor.a]}
 	save_json(filepath, newdata)
 	pass
 
@@ -79,9 +133,7 @@ func readcontents(path: String) -> void:
 		push_error("Failed to open JSON file: " + path)
 	var json_text = JSON.parse_string(file.get_as_text()) 
 	
-	
 	textedit.add_theme_font_size_override("font_size", json_text["fontsize"])
-	textedit.text = json_text["content"]
 	$Changer/FontSizeProperty/fontsizeslider.value = json_text["fontsize"]
 	fontcolor = Color(json_text["fontcolor"][0], json_text["fontcolor"][1], json_text["fontcolor"][2], json_text["fontcolor"][3])
 	textedit.add_theme_color_override("font_color", fontcolor)
@@ -90,7 +142,13 @@ func readcontents(path: String) -> void:
 	panelcolor = Color(json_text["panelcolor"][0], json_text["panelcolor"][1], json_text["panelcolor"][2], json_text["panelcolor"][3])
 	paneltheme.bg_color = panelcolor
 	paneltheme.border_color = panelcolor
-
+	
+	if json_text.has("content_list"):
+		text_list = json_text["content_list"]
+	if json_text.has("content"):
+		text_list.push_front(json_text["content"])
+	textedit.text = text_list[0]
+	print(text_list[0])
 
 func save_json(file_path: String, data: Dictionary) -> void:
 	var json_text = JSON.stringify(data, "\t")  
@@ -104,7 +162,11 @@ func save_json(file_path: String, data: Dictionary) -> void:
  
 
 func _on_save_pressed() -> void:
-	savecontents(textedit.text)
+	
+	#this is here because when saving the program is made in a way it updates the text_list each time when a page is changed, but when u save a page and dont change the page it doesnt get saved
+	#so to avoid that i added this here s o that every page can be saved
+	text_list[currentpage - 1] = textedit.text
+	savecontents(text_list)
 
 
 func _on_back_pressed() -> void:
@@ -119,6 +181,7 @@ func _on_screen_resized():
 	$Back.add_theme_font_size_override("font_size", (40 * scale_factor))
 	$Properties.add_theme_font_size_override("font_size", (40 * scale_factor))
 	$Changer/BackgroundSelector/RichTextLabel.add_theme_font_size_override("font_size", (70 * scale_factor))
+	
 	
 	
 	#MOve the changer to right of the screen
@@ -211,7 +274,7 @@ func _on_item_list_item_clicked(index: int, _at_position: Vector2, _mouse_button
 			$Changer/ThemeColor.show()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	keybheight = DisplayServer.virtual_keyboard_get_height()
 
 
@@ -309,7 +372,6 @@ func _on_panelcolorpicker_color_changed(color: Color) -> void:
 
 
 func _on_theme_color_changed(color: Color) -> void:
-	print($ColorRect.get_instance_shader_parameter("color2"))
 	$ColorRect.set_instance_shader_parameter("color2", Vector4(color.r, color.g, color.b, color.a))
 	fade_out_panel($Background3)
 	fade_out_panel($SettingContainer)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bopqe3bfsibqa" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="FontFile" uid="uid://sks63ere33r2" path="res://Pixelify_Sans/static/PixelifySans-Regular.ttf" id="1_ig7tw"]
-[ext_resource type="Material" uid="uid://d2qdm1byirqow" path="res://shader.tres" id="2_h2yge"]
+[ext_resource type="Material" uid="uid://77e4trguic72" path="res://shaders/shader2.tres" id="2_h2yge"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
 content_margin_left = 24.0
